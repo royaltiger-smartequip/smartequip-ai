@@ -1,0 +1,21 @@
+{
+  "name": "smartequip-ai",
+  "version": "1.0.0",
+  "description": "SmartEquip AI GitHub App",
+  "author": "Randy K",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "probot run ./index.js",
+    "dev": "nodemon --exec probot run ./index.js"
+  },
+  "dependencies": {
+    "probot": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">= 18"
+  }
+}
