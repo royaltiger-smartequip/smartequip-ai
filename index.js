@@ -69,7 +69,7 @@ module.exports = (app) => {
     contextLines.push(`Requested by: ${commentAuthor}`);
 
     const issueOrPR = isPullRequest ? "PR" : "issue";
-    const prompt = `clone smartequip-agent-skills and smartequip-products. Also clone ${repoName}. IMPORTANT: Before starting work, read the MODAL_MONITOR_URL environment variable. If it is set, post a comment on ${issueOrPR} #${issueNumber} in ${repoFullName} using gh, like this: gh issue comment ${issueNumber} --repo ${repoFullName} --body "Working on this.\n\n| Detail | Value |\n|--------|-------|\n| **Monitor** | [View in Modal]($MODAL_MONITOR_URL) |"\n\nHere is the user's comment: ${cleanedComment}. If you need further context, refer to the previous comments to figure out what to do.\n\nWhen you are done, post your result as a comment on ${issueOrPR} #${issueNumber} in ${repoFullName} using gh: gh issue comment ${issueNumber} --repo ${repoFullName} --body "<your result>"\n\n--- Context ---\n${contextLines.join("\n")}`;
+    const prompt = `clone smartequip-agent-skills and smartequip-products. Also clone ${repoName}. CRITICAL: Read the Platform Concierge agent definition from smartequip-agent-skills/agents/common/platform-concierge/AGENTS.md and follow its workflow exactly. You are in AUTONOMOUS mode. The user said: "${cleanedComment}". Use the concierge's pipeline detection to determine the correct phase and execute the appropriate action. Do NOT implement code directly — always follow the pipeline steps (issue creation, chained execution, reviews). Context: ${issueOrPR} #${issueNumber} in ${repoFullName}.\n\n--- Context ---\n${contextLines.join("\n")}`;
 
     app.log.info(`Triggering Modal for ${repoFullName}#${issueNumber}`);
 
